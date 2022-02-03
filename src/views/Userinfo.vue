@@ -18,10 +18,10 @@
     <a-modal title="更改密码" v-model:visible="visibleCode"  @ok="handleUpdateCodeOk">
       <a-form ref="formRef" :model="updateCodeForm" :rules="rulesCode" :label-col="labelCol" :wrapper-col="wrapperCol">
         <a-form-item ref="name" label="旧密码" name="oldPwd">
-          <a-input v-model:value="updateCodeForm.oldPwd" />
+          <a-input-password v-model:value="updateCodeForm.oldPwd" />
         </a-form-item>
         <a-form-item label="新密码" name="newPwd">
-          <a-textarea v-model:value="updateCodeForm.newPwd" />
+          <a-input-password v-model:value="updateCodeForm.newPwd" />
         </a-form-item>
       </a-form>
     </a-modal>

@@ -4,7 +4,7 @@
       <a-input v-model:value="formState.username" />
     </a-form-item>
     <a-form-item label="密码" name="password">
-      <a-textarea v-model:value="formState.password" />
+      <a-input-password v-model:value="formState.password" />
     </a-form-item>
 
 
