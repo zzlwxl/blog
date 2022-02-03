@@ -1,19 +1,31 @@
 <template>
-  <a-list class="demo-loadmore-list" :loading="loading" item-layout="horizontal" :data-source="contentList">
+  <a-list item-layout="vertical" size="large" :loading="loading"  :data-source="contentList">
     <template #renderItem="{ item }">
-      <a-list-item>
-        <a-comment :author="item.author_id" avatar="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png">
-          <template #content>
-            <p>
-              {{ item.content_view }}
-            </p>
+      <a-list-item key="item.title">
+        <template #actions>
+          <span v-for="{ type, text } in actions" :key="type">
+            <component v-bind:is="type" style="margin-right: 8px" />
+            {{ text }}
+          </span>
+          <a @click="$router.push(`/article/info/${item.id}`)">
+            阅读文章
+            <SendOutlined />
+            </a>
+        </template>
+        <template #extra>
+          <img
+            width="272"
+            alt="logo"
+            src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+          />
+        </template>
+        <a-list-item-meta>
+          <template #title>
+            <h4>{{ item.title }}</h4>
           </template>
-          <template #datetime>
-            <a-tooltip>
-              <span>{{ item.pub_date }}</span>
-            </a-tooltip>
-          </template>
-        </a-comment>
+          <template #avatar><a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></template>
+        </a-list-item-meta>
+        {{ item.content_view }}
       </a-list-item>
     </template>
     <template #loadMore>
@@ -25,11 +37,17 @@
   </a-list>
 </template>
 <script>
-import moment from 'moment'
 import { defineComponent, reactive, ref, watch } from 'vue'
+import { StarOutlined, LikeOutlined, MessageOutlined ,SendOutlined} from '@ant-design/icons-vue';
 import { getContentList ,getContentListByCate} from '../request/api.js'
 import { message } from 'ant-design-vue'
 export default defineComponent({
+  components: {
+    StarOutlined,
+    LikeOutlined,
+    MessageOutlined,
+    SendOutlined
+  },
   props: {
     cate_id: {
       type: Number,
@@ -45,6 +63,21 @@ export default defineComponent({
     let contentList = reactive([])
     //分类ID
     let cateId = ref(0)
+
+    const actions = [
+      {
+        type: 'StarOutlined',
+        text: '156',
+      },
+      {
+        type: 'LikeOutlined',
+        text: '156',
+      },
+      {
+        type: 'MessageOutlined',
+        text: '2',
+      },
+    ];
 
     //接收父组件传过来的分类ID
     // const cate_id = inject('cate_id')
@@ -119,8 +152,8 @@ export default defineComponent({
       loading,
       loadingMore,
       loadMore,
-      moment,
       contentList,
+      actions
     }
   },
 })

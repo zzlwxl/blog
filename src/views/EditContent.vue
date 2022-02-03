@@ -14,22 +14,23 @@
       </a-radio-group>
     </a-form-item>
     <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
-      <a-button type="primary" @click="onSubmit">发布</a-button>
-      <!-- <a-button type="primary" style="margin-left: 10px" @click="$router.push('/reguser')">注册</a-button> -->
+      <a-button type="primary" @click="onSubmit">更新</a-button>
+      <a-button type="primary" style="margin-left: 10px" @click="delSubmit">删除文章</a-button>
     </a-form-item>
   </a-form>
 </template>
 <script>
 import { defineComponent, reactive, ref, toRaw } from 'vue'
-import { addArticle } from '../request/api.js'
+import { getContentInfo,updataContent,delContent} from '../request/api.js'
 import { useRouter } from 'vue-router'
 import { message } from 'ant-design-vue'
 import Cate from '../components/Cate.vue'
 export default defineComponent({
+    props:['id'],
   components: {
     Cate,
   },
-  setup() {
+  setup(props,context) {
     const router = useRouter()
     const formRef = ref()
     const formState = reactive({
@@ -65,11 +66,12 @@ export default defineComponent({
       console.log('接收的值', id)
       formState.cate_id = id
     }
+    //更新文章
     const onSubmit = () => {
       formRef.value
         .validate()
         .then(() => {
-          addArticle(formState).then((res) => {
+          updataContent(props.id,formState).then((res) => {
             if (res.status !== 0) {
               return message.error(res.message)
             }
@@ -81,6 +83,35 @@ export default defineComponent({
           console.log('error', error)
         })
     }
+    //删除文章
+    const delSubmit = () => {
+      formRef.value
+        .validate()
+        .then(() => {
+          delContent(props.id).then((res) => {
+            if (res.status !== 0) {
+              return message.error(res.message)
+            }
+            message.success(res.message)
+            router.back()
+          })
+        })
+        .catch((error) => {
+          console.log('error', error)
+        })
+    }
+    //获取文章信息
+    const getContent = () => {
+          getContentInfo(props.id).then((res) => {
+            if (res.status !== 0) {
+              return message.error(res.message)
+            }
+            console.log(res)
+            formState.title=res.data[0].title
+            formState.content=res.data[0].content
+          })
+        }
+    getContent()
 
     const resetForm = () => {
       formRef.value.resetFields()
@@ -98,6 +129,7 @@ export default defineComponent({
       formState,
       rules,
       onSubmit,
+      delSubmit,
       changeCateByAdd,
       resetForm,
     }

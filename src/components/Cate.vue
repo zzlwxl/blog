@@ -21,7 +21,6 @@
       </a-radio-group>
     </a-form-item>
   </a-form>
-  {{formState.cate}}
 </template>
 <script>
 import { defineComponent, reactive, ref, watch } from 'vue'

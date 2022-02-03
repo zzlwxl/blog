@@ -1,19 +1,14 @@
-# blog
+# 介绍
 
-## Project setup
-```
-npm install
-```
+这是我第一个vue3的项目，也是我第一个前后端共同开发的项目，不过我还是挺推荐类似这样的项目作为前后端的练手项目，也基本实现了博客最低的功能要求，当然了，后续还是要对它进行完善。
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## 技术栈
 
-### Compiles and minifies for production
-```
-npm run build
-```
+vue3+router+vuex+ant design
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 目前有的功能
+
+注册登录、修改用户信息，文章和分类的增删改查。
+
+演示地址：http://blog.wangxuelong.vip
+

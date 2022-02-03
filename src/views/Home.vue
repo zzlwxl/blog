@@ -1,7 +1,7 @@
-<template>
-  <a-layout>
-    <a-layout-sider breakpoint="lg" collapsed-width="0" @collapse="onCollapse" @breakpoint="onBreakpoint">
-      <div class="logo" />
+<template >
+  <a-layout :style="{overflow:'hidden'}">
+    <a-layout-sider breakpoint="lg"  collapsed-width="0" @collapse="onCollapse" @breakpoint="onBreakpoint">
+      <div class="logo" >渣渣龙博客</div>
       <a-menu theme="dark" mode="inline">
         <a-menu-item @click="userInfoFun" key="1">
           <user-outlined />
@@ -15,22 +15,18 @@
           <upload-outlined />
           <span class="nav-text" @click="$router.push('/article/my')">我的文章</span>
         </a-menu-item>
-        <a-menu-item key="4">
-          <user-outlined />
-          <span class="nav-text">nav 4</span>
-        </a-menu-item>
       </a-menu>
     </a-layout-sider>
     <a-layout>
-      <a-layout-header :style="{ background: '#fff', padding: 0 }">
+      <a-layout-header :style="{ background: '#fff', padding: 0 ,height:'10vh'}">
         <CateTabs @changeCateByTab="changeCateID"></CateTabs>
       </a-layout-header>
-      <a-layout-content :style="{ margin: '24px 16px 0' }">
+      <a-layout-content :style="{ overflow: 'auto', height: '90vh',  }">
         <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
           <ContentCard :cate_id="cate_id"></ContentCard>
+      <a-layout-footer style="text-align: center"> 底部 </a-layout-footer>
         </div>
       </a-layout-content>
-      <a-layout-footer style="text-align: center"> Ant Design ©2018 Created by Ant UED </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -106,8 +102,9 @@ export default defineComponent({
 </script>
 <style>
 .logo {
+  text-align: center;
   height: 32px;
-  background: rgba(255, 255, 255, 0.2);
+  color: rgb(255, 255, 255);
   margin: 16px;
 }
 

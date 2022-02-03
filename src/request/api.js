@@ -1,7 +1,7 @@
 /**   
  * api接口统一管理
  */
- import { get, post } from './http'
+ import { get, post ,deletefn} from './http'
  //注册
  export const reguser = (userInfo) => post('/api/reguser',userInfo);
  //登录
@@ -24,4 +24,10 @@
  export const getContentListByCate =(cate_id,offset,limit)=>get(`/anyone/article/getarticles/bycate?cate_id=${cate_id}&offset=${offset}&limit=${limit}`)
  //获取指定用户下文章列表
  export const getContentListByUser =(offset,limit)=>get(`/my/article/byuser/getarticles?offset=${offset}&limit=${limit}`)
- 
+ //根据ID获取文章详情
+ export const getContentInfo =(id)=>get(`/anyone/article/getarticle/info/${id}`)
+ //更新文章
+ export const updataContent =(id,formInfo)=>post(`/my/article/update/articleinfo/${id}`,formInfo)
+ //用户删除文章
+ export const delContent = (id) => deletefn(`/my/article/delarticle/${id}`)
+

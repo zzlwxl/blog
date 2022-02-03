@@ -16,9 +16,11 @@ import {
     Comment,
     Tooltip,
     List,
+    Icon,
 } from "ant-design-vue";
 
 export const antArr = [
+    Icon,
     List,
     Tooltip,
     Comment,

@@ -12,9 +12,9 @@
 
  // 环境的切换
  if (process.env.NODE_ENV == 'development') {    
-     axios.defaults.baseURL = 'http://127.0.0.1:3007/';
+     axios.defaults.baseURL = 'http://blog.wangxuelong.vip:3007/';
  } else if (process.env.NODE_ENV == 'debug') {    
-     axios.defaults.baseURL = '';
+     axios.defaults.baseURL = 'http://blog.wangxuelong.vip:3007/';
  } else if (process.env.NODE_ENV == 'production') {    
      axios.defaults.baseURL = 'http://blog.wangxuelong.vip:3007/';
  }
@@ -117,6 +117,22 @@
  export function post(url, params) {    
      return new Promise((resolve, reject) => {         
          axios.post(url, QS.stringify(params))        
+         .then(res => {            
+             resolve(res.data);        
+            })        
+            .catch(err => {            
+                reject(err.data)        
+            })    
+        });
+    }
+    /** 
+     * delete方法 
+     * @param {String} url [请求的url地址] 
+     * @param {Object} params [请求时携带的参数] 
+     */
+ export function deletefn(url, params) {    
+     return new Promise((resolve, reject) => {         
+         axios.delete(url, QS.stringify(params))        
          .then(res => {            
              resolve(res.data);        
          })        
