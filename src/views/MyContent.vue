@@ -8,30 +8,30 @@
     <template #renderItem="{ item }">
       <a-list-item key="item.title">
         <template #actions>
-          <span v-for="{ type, text } in actions" :key="type">
+          <!-- <span v-for="{ type, text } in actions" :key="type">
             <component v-bind:is="type" style="margin-right: 8px" />
             {{ text }}
-          </span>
+          </span> -->
           <a @click="$router.push(`/article/edit/${item.id}`)">
             <FormOutlined />
             编辑文章
             </a>
         </template>
         <template #extra>
-          <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" />
+          <!-- <img width="272" alt="logo" src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png" /> -->
         </template>
         <a-list-item-meta>
           <template #title>
             <a>{{ item.title }}</a>
           </template>
-          <template #avatar><a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></template>
+          <!-- <template #avatar><a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></template> -->
         </a-list-item-meta>
         {{ item.content_view }}
       </a-list-item>
     </template>
     <template #loadMore>
       <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
-        <a-spin v-if="loadingMore" />
+        <a-spin v-if="loadingMore" size="large" />
         <a-button v-else @click="loadMore">加载更多</a-button>
       </div>
     </template>
@@ -82,6 +82,7 @@ export default defineComponent({
 
     //加载所有文章列表
     const loadMore = () => {
+      loadingMore.value=true
       getContentListByUser(offset, limit).then((res) => {
         console.log(res)
         if (res.status !== 0) {
@@ -92,9 +93,10 @@ export default defineComponent({
         offset += limit
         if (!res.data.length) {
           message.info('所有文章加载完毕')
-          loadingMore.value = true
+          return loadingMore.value = false
         }
         contentList.push(...res.data)
+        loadingMore.value=false
       })
     }
     loadMore()

@@ -4,6 +4,7 @@
     sub-title="返回"
     @back="$router.back"
   />
+  <div class="box">
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
     <a-form-item ref="name" label="用户名" name="username">
       <a-input v-model:value="formState.username" />
@@ -17,6 +18,8 @@
       <a-button type="primary" @click="onSubmit">注册</a-button>
     </a-form-item>
   </a-form>
+
+  </div>
 </template>
 <script>
 import { defineComponent, reactive, ref, toRaw } from 'vue'
@@ -101,3 +104,9 @@ export default defineComponent({
   },
 })
 </script>
+<style>
+.box{
+  width: 80%;
+  margin: 10px auto;
+}
+</style>

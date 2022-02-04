@@ -17,8 +17,8 @@
         <a-radio v-for="(item, index) in cateList" :key="index" @click="changeCate(item.id)" :value="item.id">
           {{ item.name }}
         </a-radio>
-        <a-button style="margin-left: 10px" type="primary" @click="showModalCate">新增分类</a-button>
       </a-radio-group>
+        <a-button style="margin-left: 10px" type="primary" @click="showModalCate">新增分类</a-button>
     </a-form-item>
   </a-form>
 </template>

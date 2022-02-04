@@ -3,34 +3,36 @@
     <template #renderItem="{ item }">
       <a-list-item key="item.title">
         <template #actions>
-          <span v-for="{ type, text } in actions" :key="type">
+          <!-- <span v-for="{ type, text } in actions" :key="type">
             <component v-bind:is="type" style="margin-right: 8px" />
             {{ text }}
-          </span>
+          </span> -->
+          <!-- <UserOutlined /> -->
+          <!-- <span>{{getAuthor(item.author_id)}}</span> -->
           <a @click="$router.push(`/article/info/${item.id}`)">
             阅读文章
             <SendOutlined />
             </a>
         </template>
         <template #extra>
-          <img
+          <!-- <img
             width="272"
             alt="logo"
             src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
-          />
+          /> -->
         </template>
         <a-list-item-meta>
           <template #title>
             <h4>{{ item.title }}</h4>
           </template>
-          <template #avatar><a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></template>
+          <!-- <template #avatar><a-avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /></template> -->
         </a-list-item-meta>
         {{ item.content_view }}
       </a-list-item>
     </template>
     <template #loadMore>
       <div :style="{ textAlign: 'center', marginTop: '12px', height: '32px', lineHeight: '32px' }">
-        <a-spin v-if="loadingMore" />
+        <a-spin v-if="loadingMore" size="large" />
         <a-button v-else @click="loadMore">加载更多</a-button>
       </div>
     </template>
@@ -38,15 +40,16 @@
 </template>
 <script>
 import { defineComponent, reactive, ref, watch } from 'vue'
-import { StarOutlined, LikeOutlined, MessageOutlined ,SendOutlined} from '@ant-design/icons-vue';
-import { getContentList ,getContentListByCate} from '../request/api.js'
+import { StarOutlined, LikeOutlined, MessageOutlined ,SendOutlined,UserOutlined} from '@ant-design/icons-vue';
+import { getContentList ,getContentListByCate,getAuthorName} from '../request/api.js'
 import { message } from 'ant-design-vue'
 export default defineComponent({
   components: {
     StarOutlined,
     LikeOutlined,
     MessageOutlined,
-    SendOutlined
+    SendOutlined,
+    UserOutlined
   },
   props: {
     cate_id: {
@@ -99,7 +102,16 @@ export default defineComponent({
         }
       }
     )
-
+    // 获取文章作者名字
+    const getAuthor=(id)=>{
+      getAuthorName(id).then((res) => {
+          if (res.status !== 0) {
+            return message.error(res.message)
+          }
+          console.log(res.data.username)
+          return refres.data.username
+        })
+    }
     //初始化加载数据
     const init = () => {
       offset = 0
@@ -110,6 +122,7 @@ export default defineComponent({
     }
     //加载所有文章列表
     const loadMore = () => {
+      loadingMore.value=true
       if(flag.value){
         getContentList(offset, limit).then((res) => {
           console.log(res)
@@ -121,9 +134,10 @@ export default defineComponent({
           offset += limit
           if (!res.data.length) {
             message.info('所有文章加载完毕')
-            loadingMore.value = true
+            return loadingMore.value = false
           }
-          contentList.push(...res.data)
+            contentList.push(...res.data)
+            loadingMore.value=false
         })
       }else{
         console.log('大喊大叫好')
@@ -132,6 +146,7 @@ export default defineComponent({
     }
     //加载分类下所有文章列表
     const loadMoreByCate = (id) => {
+      loadMore.value=true
       getContentListByCate(id,offset, limit).then((res) => {
         console.log(res)
         if (res.status !== 0) {
@@ -145,6 +160,7 @@ export default defineComponent({
           loadingMore.value = true
         }
         contentList.push(...res.data)
+        loadMore.value=false
       })
     }
     loadMore()
@@ -153,8 +169,14 @@ export default defineComponent({
       loadingMore,
       loadMore,
       contentList,
-      actions
+      actions,
+      getAuthor,
     }
   },
 })
 </script>
+<style>
+.example {
+  text-align: center;
+}
+</style>

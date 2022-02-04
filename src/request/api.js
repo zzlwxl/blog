@@ -10,6 +10,8 @@
  export const updateUserinfo = (userInfo)=>post('/my/userinfo',userInfo)
  //获取用户信息
  export const getUserinfo = ()=>get('/my/userinfo')
+ //根据ID获取获取作者信息
+ export const getAuthorName = (id)=>get(`/anyone/article/userinfo/${id}`)
  //更改用户密码
  export const updateCode = (code)=>post('/my/updatepwd',code)
  //获取文章分类

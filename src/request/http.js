@@ -12,7 +12,7 @@
 
  // 环境的切换
  if (process.env.NODE_ENV == 'development') {    
-     axios.defaults.baseURL = 'http://elm.wangxuelong.vip:3007/';
+     axios.defaults.baseURL = 'http://127.0.0.1:3007/';
  } else if (process.env.NODE_ENV == 'debug') {    
      axios.defaults.baseURL = 'http://elm.wangxuelong.vip:3007/';
  } else if (process.env.NODE_ENV == 'production') {    

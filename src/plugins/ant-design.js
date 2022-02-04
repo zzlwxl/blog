@@ -18,9 +18,11 @@ import {
     List,
     Icon,
     PageHeader,
+    Spin,
 } from "ant-design-vue";
 
 export const antArr = [
+    Spin,
     PageHeader,
     Icon,
     List,

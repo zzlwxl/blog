@@ -4,19 +4,22 @@
     sub-title="返回"
     @back="$router.back"
   />
+  <div class="box">
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
-    <a-form-item ref="name" label="用户名" name="username">
+    <a-form-item  ref="name" label="用户名" name="username">
       <a-input v-model:value="formState.username" />
     </a-form-item>
     <a-form-item label="密码" name="password">
       <a-input-password v-model:value="formState.password" />
     </a-form-item>
 
-    <a-form-item :wrapper-col="{ span: 14, offset: 4 }">
+
+    <a-form-item class="example">
       <a-button type="primary" @click="onSubmit">登录</a-button>
       <a-button type="primary" style="margin-left: 10px" @click="$router.push('/reguser')">注册</a-button>
     </a-form-item>
   </a-form>
+  </div>
 </template>
 <script>
 import { defineComponent, reactive, ref, toRaw } from 'vue'
@@ -106,3 +109,9 @@ export default defineComponent({
   },
 })
 </script>
+<style>
+.box{
+  width: 80%;
+  margin: 10px auto;
+}
+</style>
