@@ -17,9 +17,11 @@ import {
     Tooltip,
     List,
     Icon,
+    PageHeader,
 } from "ant-design-vue";
 
 export const antArr = [
+    PageHeader,
     Icon,
     List,
     Tooltip,

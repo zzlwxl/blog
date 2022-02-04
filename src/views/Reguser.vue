@@ -1,4 +1,9 @@
 <template>
+<a-page-header
+    style="border: 1px solid rgb(235, 237, 240)"
+    sub-title="返回"
+    @back="$router.back"
+  />
   <a-form ref="formRef" :model="formState" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
     <a-form-item ref="name" label="用户名" name="username">
       <a-input v-model:value="formState.username" />

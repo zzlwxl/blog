@@ -1,4 +1,9 @@
 <template>
+<a-page-header
+    style="border: 1px solid rgb(235, 237, 240)"
+    sub-title="返回"
+    @back="$router.back"
+  />
   <a-list item-layout="vertical" size="large" :loading="loading" :data-source="contentList">
     <template #renderItem="{ item }">
       <a-list-item key="item.title">

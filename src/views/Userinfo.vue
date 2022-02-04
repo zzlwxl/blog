@@ -1,4 +1,9 @@
 <template>
+<a-page-header
+    style="border: 1px solid rgb(235, 237, 240)"
+    sub-title="返回"
+    @back="$router.back"
+  />
   <div>
     <a-modal title="编辑信息" v-model:visible="visibleUpdate" :confirm-loading="confirmLoading" @ok="handleOk">
       <a-form ref="formRef" :model="updateForm" :rules="rules" :label-col="labelCol" :wrapper-col="wrapperCol">
