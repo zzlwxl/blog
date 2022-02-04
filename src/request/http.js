@@ -12,11 +12,11 @@
 
  // 环境的切换
  if (process.env.NODE_ENV == 'development') {    
-     axios.defaults.baseURL = 'https://elm.wangxuelong.vip:3007/';
+     axios.defaults.baseURL = 'http://elm.wangxuelong.vip:3007/';
  } else if (process.env.NODE_ENV == 'debug') {    
-     axios.defaults.baseURL = 'https://elm.wangxuelong.vip:3007/';
+     axios.defaults.baseURL = 'http://elm.wangxuelong.vip:3007/';
  } else if (process.env.NODE_ENV == 'production') {    
-     axios.defaults.baseURL = 'https://elm.wangxuelong.vip:3007/';
+     axios.defaults.baseURL = 'http://elm.wangxuelong.vip:3007/';
  }
  
  // 请求超时时间
