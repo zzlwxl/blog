@@ -1,9 +1,4 @@
 <template>
-  <a-page-header
-    style="border: 1px solid rgb(235, 237, 240)"
-    sub-title="返回"
-    @back="$router.back"
-  />
   <a-list class="demo-loadmore-list"  item-layout="horizontal" :data-source="contentList">
     <template #renderItem="{ item }">
         <h1>{{item.title}}</h1>

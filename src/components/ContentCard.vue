@@ -9,8 +9,8 @@
           </span> -->
           <!-- <UserOutlined /> -->
           <!-- <span>{{getAuthor(item.author_id)}}</span> -->
-          <a @click="$router.push(`/article/info/${item.id}`)">
-            阅读文章
+          <a>
+          <router-link target="_blank" :to="{path:`/article/info/${item.id}`}">阅读文章</router-link>
             <SendOutlined />
             </a>
         </template>
