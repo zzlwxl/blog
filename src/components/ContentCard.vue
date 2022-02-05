@@ -146,7 +146,7 @@ export default defineComponent({
     }
     //加载分类下所有文章列表
     const loadMoreByCate = (id) => {
-      loadMore.value=true
+      loadingMore.value=true
       getContentListByCate(id,offset, limit).then((res) => {
         console.log(res)
         if (res.status !== 0) {
@@ -157,10 +157,10 @@ export default defineComponent({
         offset += limit
         if (!res.data.length) {
           message.info('所有文章加载完毕')
-          loadingMore.value = true
+            return loadingMore.value = false
         }
         contentList.push(...res.data)
-        loadMore.value=false
+        loadingMore.value=false
       })
     }
     loadMore()
